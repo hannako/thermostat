@@ -51,7 +51,7 @@ Thermostat = function(){
     return this.temperature = this.DEFAULT_TEMPERATURE
   };
 
-  Thermostat.prototype.displayColourReporter = function() {
+  Thermostat.prototype.energyUseReporter = function() {
     if (this.temperature < this.MEDIUM_TEMPERATURE_LIMIT) {
       return this.energyConsumption[0]
     }

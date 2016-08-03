@@ -61,19 +61,19 @@ describe('Thermostat', function(){
   // The thermostat should colour the display based on energy usage - < 18 is green, < 25 is yellow, otherwise red
   it('Has a display: LOW if below 18', function(){
     for(var i=0; i < 3; i++){ thermostat.down(); };
-    expect(thermostat.displayColourReporter()).toEqual('low')
+    expect(thermostat.energyUseReporter()).toEqual('low')
   });
 
   it('Has a display of: MEDIUM if below 25', function(){
     for(var i=0; i <4; i++) { thermostat.up(); };
-    expect(thermostat.displayColourReporter()).toEqual('medium')
+    expect(thermostat.energyUseReporter()).toEqual('medium')
   })
 
   it('Has a display of: HIGH if above 25', function(){
     thermostat.switchPowerSaveOff();
     var times = 10
     for(var i = 0; i<times; i++){ thermostat.up(); };
-    expect(thermostat.displayColourReporter()).toEqual('high')
+    expect(thermostat.energyUseReporter()).toEqual('high')
   })
 
 
