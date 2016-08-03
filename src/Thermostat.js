@@ -1,20 +1,24 @@
 
 Thermostat = function(){
-  this.temperature = 20;
+  this.MINIMUM_TEMP = 10;
+  this.DEFAULT_TEMP = 20;
+  this.POWERSAVE_MAX_TEMP = 25;
+  this.MAXIMUM_TEMP = 32;
+  this.temperature = this.DEFAULT_TEMP;
   this.powerSave = true;
   this.displayColour = ['green','yellow','red']
 };
 
-  Thermostat.prototype.temperature = function() {
+  Thermostat.prototype.getTemperature = function() {
     return this.temperature;
   };
 
   Thermostat.prototype.up = function() {
-    if (this.powerSave && (this.temperature >= 25)) {
-      throw new Error('Powersave On: Can not go above 25 degrees');
+    if (this.powerSave && (this.temperature >= this.POWERSAVE_MAX_TEMP)) {
+      throw new Error('Error: Maximum temperature reached');
     }
-    else if (this.temperature >= 32) {
-      throw new Error('Powersave Off: Can not go above 32 degrees');
+    else if (this.temperature >= this.MAXIMUM_TEMP) {
+      throw new Error('Error: Maximum temperature reached');
     }
     else {
       return this.temperature += 1;
@@ -22,15 +26,15 @@ Thermostat = function(){
   };
 
   Thermostat.prototype.down = function() {
-    if (this.temperature > 10) {
+    if (this.temperature > this.MINIMUM_TEMP) {
       return this.temperature -= 1;
     }
     else {
-      throw new Error("It's too cold you CRAZY!!");
+      throw new Error('Error: Minimum temperature reached');
     }
   };
 
-  Thermostat.prototype.powerSavingOn = function() {
+  Thermostat.prototype.switchPowerSaveOn = function() {
     return this.powerSave = true;
   };
 
@@ -38,12 +42,12 @@ Thermostat = function(){
     return this.powerSave;
   };
 
-  Thermostat.prototype.powerSavingOff = function() {
+  Thermostat.prototype.switchPowerSaveOff = function() {
     return this.powerSave = false;
   };
 
   Thermostat.prototype.reset = function () {
-    return this.temperature = 20
+    return this.temperature = this.DEFAULT_TEMP
   };
 
   Thermostat.prototype.displayColourReporter = function() {
