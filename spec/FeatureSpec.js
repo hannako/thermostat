@@ -1,81 +1,63 @@
-
-
 describe('Thermostat', function(){
-  var thermostat;
-  // SPECIFICATION 1:
-  // Thermostat starts at 20 degrees
-  beforeEach (function(){
-    thermostat = new Thermostat();
-  });
+
+    var thermostat;
+
+    beforeEach (function(){
+      thermostat = new Thermostat();
+    });
 
   it('initializes at 20 degrees', function() {
     expect(thermostat.temperature).toEqual(20);
   });
 
-  // You can increase the temperature with the up button
-  // USE CHANGE_BY (OR EQUIVALENT) SO WE DON'T HARDCODE 21
-
-  it('increases the temperature by 1 degree when you press the up button',function(){
+  it('increases the temp by 1 when you press up',function(){
     thermostat.up();
     expect(thermostat.temperature).toEqual(21);
   });
 
-  // You can decrease the temperature with the down button
-    // USE CHANGE_BY (OR EQUIVALENT) SO WE DON'T HARDCODE 19
-  it('decreases the temperature by 1 degree when you press the down button', function(){
+  it('decreases the temp by 1 when you press down', function(){
     thermostat.down();
     expect(thermostat.temperature).toEqual(19);
   });
 
-  // The minimum temperature is 10 degrees
-  it('Cannt drop below 10 dgrees',function(){
+  it('Cannot drop below 10',function(){
     var times =10;
-    for(var i=0;
-      i < times;
-      i++) {
-        thermostat.down();
-      };
-    expect(function(){ thermostat.down(); }).toThrow( Error("It's too clod you CRAZY!!"));
+    for(var i=0; i < times; i++) { thermostat.down(); };
+    expect(function(){ thermostat.down(); }).toThrow( Error("It's too cold you CRAZY!!"));
   });
 
-
-// If power saving mode is on, the maximum temperature is 25 degrees
-  it('Initialy the power saving mode is OFF',function(){
-    expect(thermostat.powerSave).toBe(false);
+  it('By default power saving mode is ON',function(){
+    expect(thermostat.powerSave).toBe(true);
   });
 
-  it('The power saving mode can be turned on',function(){
+  it('Power saving mode can be turned on',function(){
     thermostat.powerSavingOn();
     expect(thermostat.powerSave).toBe(true);
   });
 
-  it('The power saving mode can be turned off',function(){
+  it('Power saving mode can be turned off',function(){
     thermostat.powerSavingOff();
     expect(thermostat.powerSave).toBe(false);
   });
 
-
   it('If power saving mode is on, max temp is 25',function(){
-    thermostat.powerSavingOn();
     var times =5;
-    for(var i=0;
-      i < times;
-      i++) {
-        thermostat.up();
-      };
+    for(var i=0; i < times; i++) { thermostat.up(); };
       // expect(thermostat.temperature).toEqual(25)
     expect(function(){ thermostat.up(); }).toThrow( Error('Powersave On: Can not go above 25 degrees'))
   });
 
-  // If power saving mode is off, the maximum temperature is 32 degrees
-
-  it('If power saving mode is off, the maximum temperature is 32 degrees', function(){
+  it('If power saving mode is off, the max temp is 32', function(){
+    thermostat.powerSavingOff();
     var times =12;
-    for(var i=0; i < times; i++){
-      thermostat.up();
-    };
-
+    for(var i=0; i < times; i++){ thermostat.up(); };
     expect(function(){ thermostat.up(); }).toThrow( Error('Powersave Off: Can not go above 32 degrees'))
+  });
+
+  it('Has a reset button', function(){
+    thermostat.up();
+    thermostat.reset();
+    expect(thermostat.temperature).toEqual(20)
   });
 
 
