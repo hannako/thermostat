@@ -1,12 +1,13 @@
 
 Thermostat = function(){
-  this.MINIMUM_TEMP = 10;
-  this.DEFAULT_TEMP = 20;
-  this.POWERSAVE_MAX_TEMP = 25;
-  this.MAXIMUM_TEMP = 32;
-  this.temperature = this.DEFAULT_TEMP;
+  this.MINIMUM_TEMPERATURE = 10;
+  this.DEFAULT_TEMPERATURE = 20;
+  this.POWERSAVE_TEMPERATURE_LIMIT = 25;
+  this.NONPS_TEMPERATURE_LIMIT = 32;
+  this.MEDIUM_TEMPERATURE_LIMIT = 18;
+  this.temperature = this.DEFAULT_TEMPERATURE;
   this.powerSave = true;
-  this.displayColour = ['green','yellow','red']
+  this.energyConsumption = ['low','medium','high']
 };
 
   Thermostat.prototype.getTemperature = function() {
@@ -14,24 +15,24 @@ Thermostat = function(){
   };
 
   Thermostat.prototype.up = function() {
-    if (this.powerSave && (this.temperature >= this.POWERSAVE_MAX_TEMP)) {
-      throw new Error('Error: Maximum temperature reached');
+    if (this.isTempMaximum()) {
+      throw Error('Error: Maximum temperature reached');
     }
-    else if (this.temperature >= this.MAXIMUM_TEMP) {
-      throw new Error('Error: Maximum temperature reached');
-    }
-    else {
       return this.temperature += 1;
+  };
+
+  Thermostat.prototype.isTempMaximum = function () {
+    if (this.powerSaveStatus() === false) {
+      return this.temperature === this.NONPS_TEMPERATURE_LIMIT
     }
+      return this.temperature === this.POWERSAVE_TEMPERATURE_LIMIT
   };
 
   Thermostat.prototype.down = function() {
-    if (this.temperature > this.MINIMUM_TEMP) {
+    if (this.temperature > this.MINIMUM_TEMPERATURE) {
       return this.temperature -= 1;
     }
-    else {
       throw new Error('Error: Minimum temperature reached');
-    }
   };
 
   Thermostat.prototype.switchPowerSaveOn = function() {
@@ -47,17 +48,17 @@ Thermostat = function(){
   };
 
   Thermostat.prototype.reset = function () {
-    return this.temperature = this.DEFAULT_TEMP
+    return this.temperature = this.DEFAULT_TEMPERATURE
   };
 
   Thermostat.prototype.displayColourReporter = function() {
-    if (this.temperature <18) {
-      return this.displayColour[0]
+    if (this.temperature < this.MEDIUM_TEMPERATURE_LIMIT) {
+      return this.energyConsumption[0]
     }
-    else if (this.temperature < 25) {
-      return this.displayColour[1]
+    else if (this.temperature < this.POWERSAVE_TEMPERATURE_LIMIT) {
+      return this.energyConsumption[1]
     }
     else {
-      return this.displayColour[2];
+      return this.energyConsumption[2]
     }
   };
