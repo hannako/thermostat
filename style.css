@@ -1,9 +1,83 @@
+@import       url(https://fonts.googleapis.com/css?family=Roboto+Slab|Slabo+27px|Montserrat+Subrayada|Quicksand|EB+Garamond);
+
+.pushed{
+  background-color: black;
+}
+
+.buttons{
+  text-align: center;
+}
+
+.outside{
+  margin-top: 30px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgba(0, 0, 0, 0.5);;
+}
+
+.form{
+  text-align: center;
+}
+.clouds{
+  background: url(./images/clouds.jpg);
+  background-size: cover;
+}
+
+.palms{
+  background: url(./images/palmtrees.jpg);
+  background-size: cover;
+}
+
 .low {
-  background-color: green;
+  color: white;
 }
 .medium {
-  background-color: yellow;
+  /*color: rgba(0,100,100,1.0)*/
+  color: yellow;
+
 }
 .high {
+  color: rgba(255,100,100,1.0);
+  /*color: white;*/
+}
+.psm {
+  font-family: monospace;
+  font-size: 18px;
+}
+
+
+button {
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  font-family: "Quicksand";
+  padding: 10px;
+  background-color: grey;
+  border-radius: 15px;
+  border: 0px;
+}
+
+h2{
+  font-family: "Quicksand";
+  font-size: 30px;
+}
+
+#temperature {
+  font-size: 300px;
+  font-family: "Quicksand";
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 0px;
+}
+#current_temperature {
+  font-family: "Quicksand";
+  font-size; 20px;
+}
+#temp_up {
   background-color: red;
+}
+
+#temp_down {
+  background-color: green;
 }

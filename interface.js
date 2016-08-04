@@ -16,19 +16,25 @@ $(document).ready(function() {
     updateTemperature();
   });
 
-  $('#powersave_on').click(function(event) {
+  $('#powersave_on').click(function() {
     thermostat.switchPowerSaveOn();
-    $("#power_save_status").text(" on");
+    $("#powersave_off").removeClass("pushed");
+    $("#powersave_on").toggleClass("pushed");
+    $("body").removeClass("palms")
+    $("body").addClass("clouds");
   });
 
   $('#powersave_off').click(function() {
     thermostat.switchPowerSaveOff();
-    $("#power_save_status").text(" off");
+    $("#powersave_on").removeClass("pushed")
+    $("#powersave_off").toggleClass("pushed");
+    $("body").removeClass("clouds")
+    $("body").addClass("palms");
   });
 
   function updateTemperature(){
     $('#temperature').text(thermostat.getTemperature());
-    $('#temperature').attr('class', thermostat.energyUseReporter());
+    $('#temperature').attr('class',thermostat.energyUseReporter());
   };
 
   function displayWeather(city) {
