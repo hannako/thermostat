@@ -10,11 +10,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
 
   <section>
-    <h1> Current temperature: <span id='current_temperature'> </span></h1>
+    <h4> Current temperature: <span id='current_temperature'> </span></h4><br>
+    <form id='select-city'>
+      <input id='current-city' type="text" placeholder="Enter the city"></input>
+      <input type="submit"></input>
+    </form>
   </section>
 
   <section>
@@ -22,7 +25,8 @@
 
     <p id="temperature" class = 'medium'> 20 </p><br /><br />
     <p>
-
+      <button id='london' >London</button>
+      <button id='italy' >Italy</button>
       <button id="temp_up">+</button>
       <button id="temp_down">-</button>
       <button id="temp_reset">reset</button>
